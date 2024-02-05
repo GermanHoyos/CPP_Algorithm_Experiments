@@ -13,7 +13,7 @@ int main() {
     // Initialization
     int screenWidth = 800;
     int screenHeight = 450;
-    string test = "test";
+    string test = "Commit Change Test";
     
     raylib::Color textColor(LIGHTGRAY);
     raylib::Window w(screenWidth, screenHeight, "Raylib C++ Starter Kit Example");
