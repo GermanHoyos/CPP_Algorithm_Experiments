@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <raylib-cpp.hpp>
 #include <raylib.h>
 #include <cmath>
 #include <algorithm>
