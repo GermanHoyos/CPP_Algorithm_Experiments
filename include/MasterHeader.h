@@ -13,3 +13,6 @@
 #include <random>
 
 using namespace std;
+
+template<typename T>
+using dynamicList = vector<T>;
