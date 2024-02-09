@@ -22,7 +22,7 @@ int main() {
         Color myGreen = {0, 255, 0, 255};
 
     // Instantiate test objects here:
-        RectangleClass myRect(myGreen, 100, 100, 100.0f, 100.0f);
+        RectangleClass myRect(myGreen, 100.0f, 100.0f, 100.0f, 100.0f);
 
     // Window title / target FPS
         raylib::Window w(screenWidth, screenHeight, "C++ Algorithms Visualized");

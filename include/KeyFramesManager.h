@@ -21,4 +21,4 @@ class KeyFrameClass {
 
     void animate();
 
-}
+};

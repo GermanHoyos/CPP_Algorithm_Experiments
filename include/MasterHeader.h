@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <vector>
 #include <random>
+#include "InlineTweenManager.h" // differnt application becuase its inline
 
 using namespace std;
 

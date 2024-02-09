@@ -5,8 +5,8 @@ class RectangleClass {
     // Made these public for ease of animation, no getters or setters needed
         public:
             Color color; 
-            int height;
-            int width;
+            float height;
+            float width;
             float x;
             float y;
             bool animState_1;
@@ -14,7 +14,7 @@ class RectangleClass {
             bool animState_3;
         public:
     // Constructor method
-        RectangleClass (Color c, int h, int w, float xPos, float yPos)
+        RectangleClass (Color c, float h, float w, float xPos, float yPos)
     // This.color = c, this.height = h, this.animState_1 = false
         : color(c), height(h), width(w), x(xPos), y(yPos),
         animState_1(false), animState_2(false), animState_3(false) {}
