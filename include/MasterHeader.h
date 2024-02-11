@@ -11,7 +11,10 @@
 #include <iomanip>
 #include <vector>
 #include <random>
-#include "InlineTweenManager.h" // differnt application becuase its inline
+#include "RectangleManager.h"
+#include "AnimationFunctions.h"
+#include "InlineTweenManager.h" 
+#include "TimeManager.h"
 
 using namespace std;
 

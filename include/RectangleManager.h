@@ -21,6 +21,6 @@ class RectangleClass {
 
 
     // Animate Rectangle    
-    void animate();
+    void animate(void (*func)(float& x, float& y));
 
 };

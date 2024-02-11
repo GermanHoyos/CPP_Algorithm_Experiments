@@ -1,12 +1,4 @@
-// Project to visualize common algorithms in C++:
-// Created by: German Adrian Hoyos
-// To run: call runme.bat from term [this will not work without raylib dll's]
-// Use .zip package for full project files
-
-#include "include/MasterHeader.h"       // commonly used headers
-#include "include/TimeManager.h"
-#include "include/RectangleManager.h"
-
+#include "include/MasterHeader.h" 
 
 int main() {
     
@@ -43,7 +35,7 @@ int main() {
         TimeClass::displayGameTime();
  
         myRect.drawRectMthd();
-        myRect.animate();
+        myRect.animate(animation_1);
 
 
  
