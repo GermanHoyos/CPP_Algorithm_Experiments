@@ -7,8 +7,13 @@ void RectangleClass::drawRectMthd(){
 };
 
 void RectangleClass::animate(void (*func)(float& x, float& y)){
-    // Apply a specific animation to the properties of
-    // this instantiated object, such as x y height width color
     func(x,y);
-
 }
+
+void RectangleClass::animate(void (*func)(Vector2& start)) {
+    Vector2 start = {x, y}; // Create a Vector2 from the x and y values
+    func(start); 
+    x = start.x;
+    y = start.y;
+};
+
