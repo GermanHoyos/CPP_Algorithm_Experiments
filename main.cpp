@@ -35,7 +35,7 @@ int main() {
         TimeClass::displayGameTime();
  
         myRect.drawRectMthd();
-        myRect.animate(animation_1);
+        myRect.animate(animation_3);
 
 
  

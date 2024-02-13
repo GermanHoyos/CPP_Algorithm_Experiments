@@ -1,7 +1,6 @@
 #include "MasterHeader.h"
 #pragma once
 
-
 class RectangleClass {
 
     // Made these public for ease of animation, no getters or setters needed
@@ -27,4 +26,8 @@ class RectangleClass {
     void animate(void (*func)(Vector2& start));
     void animate(void (*func)(Vector2& start, Vector2& height_width));
     void animate(void (*func)(Vector2& start, Vector2& height_width, Color& c));
+
+    // Tween experiment
+    void animate(void (*func)(float& x, float& y, float time));
+
 };
