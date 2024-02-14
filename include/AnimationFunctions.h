@@ -1,5 +1,8 @@
 #include "MasterHeader.h"
 
+float duration = 0.0f;
+bool snapShotBool = false;
+
 inline void animation_1(float& x, float& y) {
     x++;
     y++;
@@ -10,7 +13,22 @@ inline void animation_2(Vector2& start) {
 };
 
 inline void animation_3(float& x, float& y, float time) {
-    x++;
+    
+    int gameTotalSeconds = GetTime(); // Assuming GetTime() returns an int representing total seconds
+    float timeInSeconds = static_cast<float>(gameTotalSeconds);
+
+    if (snapShotBool == false) {
+        duration = timeInSeconds + time;
+        snapShotBool = true;    
+    }
+
+     if (timeInSeconds < duration) {
+        x++;
+    }
+ 
+ 
+ 
+    //x++;
 }
 
 

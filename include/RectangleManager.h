@@ -17,17 +17,18 @@ class RectangleClass {
     // Draw rectangle
     void drawRectMthd();
 
-    // Animate Rectangle
+    // Animate rectangle with individual members
     void animate(void (*func)(float& x_or_y));    
     void animate(void (*func)(float& x, float& y));
     void animate(void (*func)(float& x, float& y, float& h, float& w));
     void animate(void (*func)(float& x, float& y, float& h, float& w, Color& c));
 
+    // Animate using Vector maths
     void animate(void (*func)(Vector2& start));
     void animate(void (*func)(Vector2& start, Vector2& height_width));
     void animate(void (*func)(Vector2& start, Vector2& height_width, Color& c));
 
-    // Tween experiment
-    void animate(void (*func)(float& x, float& y, float time));
+    // Animate individual members and add time cap
+    void animate(void (*func)(float& x, float& y, float time), float timeChosen);
 
 };

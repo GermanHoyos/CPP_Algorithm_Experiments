@@ -16,11 +16,8 @@ void RectangleClass::animate(void (*func)(Vector2& start)) {
     y = start.y;
 };
 
-void RectangleClass::animate(void (*func)(float& x, float& y, float time)) {
-    int gameTotalSeconds = GetTime(); // Assuming GetTime() returns an int representing total seconds
-    float timeInSeconds = static_cast<float>(gameTotalSeconds);
-    func(x, y, timeInSeconds);
+void RectangleClass::animate(void (*func)(float& x, float& y, float time), float timeChosen) {
+    func(x, y, timeChosen);
     x = this->x;
     y = this->y;
-
 };
