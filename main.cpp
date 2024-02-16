@@ -35,7 +35,9 @@ int main() {
         TimeClass::displayGameTime();
  
         myRect.drawRectMthd();
-        myRect.animate(animation_3, 2.0f);
+        
+        //[obj.animate](function, time in seconds)
+        myRect.animate(applyEaseIn, 20.0f);
 
 
  

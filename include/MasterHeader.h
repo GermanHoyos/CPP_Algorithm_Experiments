@@ -11,10 +11,10 @@
 #include <iomanip>
 #include <vector>
 #include <random>
+#include "TimeManager.h"
 #include "RectangleManager.h"
 #include "AnimationFunctions.h"
-#include "InlineTweenManager.h" 
-#include "TimeManager.h"
+
 
 using namespace std;
 

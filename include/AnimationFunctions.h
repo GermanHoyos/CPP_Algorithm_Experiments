@@ -1,46 +1,37 @@
 #include "MasterHeader.h"
 
-float duration = 0.0f;
+float animationDuration = 0.0f;
+float animationSpeed = 0.5f;
 bool snapShotBool = false;
+float EASEIN_T, EASEOUT_T = 0.0f;
 
-inline void animation_1(float& x, float& y) {
-    x++;
-    y++;
-};
 
-inline void animation_2(Vector2& start) {
-    start.x++;
-};
-
-inline void animation_3(float& x, float& y, float time) {
-    
+/***********************
+**                    **
+**     EASE IN        **
+**                    **
+***********************/
+float easeIn(float t) { // Blue line on desmos
+	return t * t; //x^2 {0<x<1}
+}
+inline void applyEaseIn(float& x, float& y, float usrDefDuration) {
+    static float initPosOfX = x;
+    static float finPosOfX = x + 30;
     int gameTotalSeconds = GetTime(); // Assuming GetTime() returns an int representing total seconds
     float timeInSeconds = static_cast<float>(gameTotalSeconds);
+    float factor = easeIn(t);
 
     if (snapShotBool == false) {
-        duration = timeInSeconds + time;
+        animationDuration = timeInSeconds + usrDefDuration;
         snapShotBool = true;    
     }
 
-     if (timeInSeconds < duration) {
-        x++;
-    }
- 
- 
- 
-    //x++;
+     if (timeInSeconds < animationDuration) {
+        t += animationSpeed * TimeClass::getDeltaTime();
+        x = initPosOfX + (finPosOfX - initPosOfX) * factor;
+    }  
 }
 
 
-inline float easeIn(float t) {
-    return t * t; // x^2 {0<x<1}
-}
-// inline void animation_3(float& x, float& y, float time) {
 
-//     Vector2 end = {(x + 50.0f),y};
-//     float factor = easeIn(t);
-
-//     float tweenX = x + (end.x - x) * factor;
-
-// }
 

@@ -5,18 +5,7 @@ void RectangleClass::drawRectMthd(){
     DrawRectangleV({x,y},{height,width},color);
 };
 
-void RectangleClass::animate(void (*func)(float& x, float& y)){
-    func(x,y);
-};
-
-void RectangleClass::animate(void (*func)(Vector2& start)) {
-    Vector2 start = {x, y}; // Create a Vector2 from the x and y values
-    func(start); 
-    x = start.x;
-    y = start.y;
-};
-
-void RectangleClass::animate(void (*func)(float& x, float& y, float time), float timeChosen) {
+void RectangleClass::animate(void (*func)(float& x, float& y, float duration), float timeChosen) {
     func(x, y, timeChosen);
     x = this->x;
     y = this->y;
