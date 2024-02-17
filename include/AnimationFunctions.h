@@ -5,7 +5,7 @@ bool setValues = false;
 
 float 
 EASEIN_T,     EASEIN_ANIMATION_DURATION,
-EASEOUT_T,    easout_animation_duration
+zeroToOneProgressEaseOut,    easout_animation_duration
 = 0.0F;
 
 /***********************
@@ -44,7 +44,6 @@ inline void applyEaseIn(float& x, float& y, float usrDefDuration) {
 
     // Reset var
         //code here..
-
 }
 
 /***********************
@@ -52,40 +51,70 @@ inline void applyEaseIn(float& x, float& y, float usrDefDuration) {
 **     EASE OUT       **
 **                    **
 ***********************/
-float easeOut(float t) { // Green line on Desmos
-    return 1 - (1 - t) * (1 - t); //1-(x-1)^2 {0<x<1}
+// zeroToOneProgressEaseOut 0.0f to 1.0f
+float easeOut(float zeroToOneProgressEaseOut) { // Green line on Desmos
+    return 1 - (1 - zeroToOneProgressEaseOut) * (1 - zeroToOneProgressEaseOut); //1-(x-1)^2 {0<x<1}
 }
+
+// Apply Ease Out only in the X place
 inline void applyEaseOut(float& x, float & y, float usrDefDuration) {
+
+    // Direction of tween must be explicitly determined since vector math is not integrated into the easing function.
+    static bool tweenLeft = false;
+    static bool tweenRight = false;
 
     // Initial values that should not change
     static float initPosOfX = x;
-    static float finPosOfX = x + 1000;
-    static bool reachedThePeak = false;
+    // Final positions should be user defined
+    static float finPosOfX = x - 200;
+
+    // X Plane  <[-1]---[initPosOfX]---[+1]>
+    if (finPosOfX > x) {
+        // Tween towards the right
+        tweenRight = true;
+    }
+    if (finPosOfX < x) {
+        // Tween towards the left
+        tweenLeft = true;
+    }
 
     // Values that should change
-    int gameTotalSeconds = GetTime(); // Assuming GetTime() returns an int representing total seconds
+    static bool reachedThePeak = false;
+    // Assuming GetTime() returns an int representing total seconds
+    int gameTotalSeconds = GetTime(); 
     float timeInSeconds = static_cast<float>(gameTotalSeconds);
-    float factor = std::max(easeOut(EASEOUT_T), 0.0f);
+    float factor = std::max(easeOut(zeroToOneProgressEaseOut), 0.0f);
 
-    // Take snap shots of vars without the limitations of static vars
+    // Takes a snap shot of vars without the limitations of c++ static
     if (setValues == false) {
-        easout_animation_duration = timeInSeconds + usrDefDuration; // this goes from 0 to some usr defined time
+        // this goes from 0 to some usr defined time
+        easout_animation_duration = timeInSeconds + usrDefDuration; 
         setValues = true;    
     }
 
-    // Based on animation duration and objects position, apply easing math to object
-    if (timeInSeconds < easout_animation_duration && reachedThePeak == false) {
-        EASEOUT_T += animationSpeed * TimeClass::getDeltaTime();
-        if (EASEOUT_T > 0) {
-            x = initPosOfX + (finPosOfX - initPosOfX) * factor;
+    // RIGHT
+    // Determine if final x position is greater or lesser than initial x position
+    // Based on the animation duration and objects position, apply easing math to object
+    if (timeInSeconds < easout_animation_duration && reachedThePeak == false && tweenRight == true) {
+        zeroToOneProgressEaseOut += animationSpeed * TimeClass::getDeltaTime();
+        x = initPosOfX + (finPosOfX - initPosOfX) * factor;
+        if (x > (finPosOfX - 1.5)) {
+            reachedThePeak = true;
         }
     }  
 
-    // Based on location, apply easing math to an object based on some control
-    if (x > (finPosOfX - 1.5) ) {  // ?
-        reachedThePeak = true;
-    }
+    // LEFT
+    // Determine if final x position is greater or lesser than initial x position
+    // Based on the animation duration and objects position, apply easing math to object
+    if (timeInSeconds < easout_animation_duration && reachedThePeak == false && tweenLeft == true) {
+        zeroToOneProgressEaseOut += animationSpeed * TimeClass::getDeltaTime();
+        x = initPosOfX + (finPosOfX - initPosOfX) * factor;
+        if (x < (finPosOfX + 1.5)) {
+            reachedThePeak = true;
+        }
+    }  
 
+    // Debug pertinent values
     std::string factor_str  = std::to_string(factor);
     std::string x_str  = std::to_string(x);
     DrawText(factor_str.c_str(), x, 200, 20, GREEN); //0.0 to 0.1
@@ -93,7 +122,6 @@ inline void applyEaseOut(float& x, float & y, float usrDefDuration) {
 
    // Reset var
         //code here..
-
 }
 
 

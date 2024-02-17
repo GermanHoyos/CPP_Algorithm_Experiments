@@ -16,7 +16,7 @@ int main() {
 
 
     // Create a RectangleClass object with appropriate arguments
-    RectangleClass myRect(myGreen, 100.0f, 100.0f, 100.0f, 100.0f);
+    RectangleClass myRect(myGreen, 100.0f, 100.0f, 200.0f, 100.0f);
 
 
     // Window title / target FPS
