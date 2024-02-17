@@ -37,7 +37,7 @@ int main() {
         myRect.drawRectMthd();
         
         //[obj.animate](function, time in seconds)
-        myRect.animate(applyEaseIn, 20.0f);
+        myRect.animate(applyEaseOut, 20.0f);
 
 
  
