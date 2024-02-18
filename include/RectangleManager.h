@@ -19,8 +19,9 @@ class RectangleClass {
 
     // Apply tween controls to this objects position
     void use(
-        void (*func)(float& xStart, float& yStart, vector<Vector2> positions, float usrDefDuration),
+        void (*func)(float& xStart, float& yStart, vector<Vector2> positions, float usrDefDuration, string tweenType),
         float timeChosen,
-        vector<Vector2>listOfPoints
+        vector<Vector2>listOfPoints,
+        string tweenType
     );
 };

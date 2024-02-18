@@ -9,9 +9,13 @@ int main() {
     int minX = 210;     // The debug vertical line is: x = 210;
     string test = "Commit Change Test";
 
+    // Chose which tween type to use
+    // "easeOut", "easeIn"
+
     // Random values for tweens
     // Manual debug:
     vector<Vector2> listOfPoints = {{300, 400}, {700, 100}, {100, 400}, {200, 100}};
+    // Rand() lists
     vector<Vector2> randList_1;
     vector<Vector2> randList_2;
     vector<Vector2> randList_3;
@@ -55,7 +59,7 @@ int main() {
         myRect2.drawRectMthd();
         
         //[obj.animate](function, time in seconds)
-        myRect2.use(keyFrames, 20.0f, randList_1);        
+        myRect2.use(keyFrames, 20.0f, randList_1, "easeIn");        
 
         EndDrawing();
     }

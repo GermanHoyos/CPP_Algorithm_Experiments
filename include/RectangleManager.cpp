@@ -6,12 +6,13 @@ void RectangleClass::drawRectMthd(){
 };
 
 void RectangleClass::use(
-    void (*func)(float& x, float& y, vector<Vector2> positions, float usrDefDuration),
+    void (*func)(float& x, float& y, vector<Vector2> positions, float usrDefDuration, string tweenType),
     float timeChosen,
-    vector<Vector2> listOfPoints
+    vector<Vector2> listOfPoints,
+    string tweenType
 ) 
 {
-    func(x, y, listOfPoints, timeChosen);
+    func(x, y, listOfPoints, timeChosen, tweenType);
     x = this->x;
     y = this->y;
 }

@@ -1,6 +1,6 @@
 #include "MasterHeader.h"
 
-float animationSpeed = 1.0f;
+float animationSpeed = 0.1f;
 bool setValues = false;
 int i = 0;
 
@@ -38,7 +38,7 @@ float easeOut(float zeroToOneProgressEaseOut) { // Green line on Desmos
 ***********************/
 // For the purposes of basic tweens on an x,y plane, the below func is sufficient, however
 // not recommended for game logic or interaction-based animations
-inline void keyFrames(float& x, float& y, vector<Vector2> positions, float usrDefDuration) {
+inline void keyFrames(float& x, float& y, vector<Vector2> positions, float usrDefDuration, string tweenType) {
         
     // Direction of tween must be explicitly determined since vector math is not integrated into the easing function.
     static bool tweenLeft   = false;
@@ -46,6 +46,7 @@ inline void keyFrames(float& x, float& y, vector<Vector2> positions, float usrDe
     static bool tweenUp     = false;
     static bool tweenDown   = false;
     static bool setValues   = false;
+    float factor;
 
     // Initial Tween direction check
     static bool initTweenDirSwtch = false; 
@@ -57,17 +58,24 @@ inline void keyFrames(float& x, float& y, vector<Vector2> positions, float usrDe
         if ( positions[i].y > (y) ) { tweenDown  = true; tweenUp    = false; }
         if ( positions[i].y < (y) ) { tweenUp    = true; tweenDown  = false; }
         zeroToOneProgressEaseOut = 0.0;
+        zeroToOneProgressEaseIn = 0.0;
         initTweenDirSwtch = true;
     }
 
     // Raylib functions and value conversions
     int gameTotalSeconds = GetTime(); 
     float timeInSeconds = static_cast<float>(gameTotalSeconds);
-    float factor = std::max(easeOut(zeroToOneProgressEaseOut), 0.0f);
 
-    // Control the animations speed
-    zeroToOneProgressEaseOut += animationSpeed * TimeClass::getDeltaTime();
-    
+    // Set and use tween type chosen by user
+    if (tweenType == "easeOut"){
+        factor = std::max(easeOut(zeroToOneProgressEaseOut), 0.0f);
+        zeroToOneProgressEaseOut += animationSpeed * TimeClass::getDeltaTime();
+    }
+    if (tweenType == "easeIn"){
+        factor = std::max(easeIn(zeroToOneProgressEaseIn), 0.0f);
+        zeroToOneProgressEaseIn += animationSpeed * TimeClass::getDeltaTime();
+    }
+  
     // Print Debug Vals
     std::string factor_str  = std::to_string(factor);
     std::string x_str  = std::to_string(x);
