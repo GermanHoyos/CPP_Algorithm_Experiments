@@ -1,5 +1,7 @@
 #pragma once
 
+// Raylib + std
+#include <cstdlib>
 #include <iostream>
 #include <raylib-cpp.hpp>
 #include <raylib.h>
@@ -13,7 +15,7 @@
 #include <random>
 using namespace std;
 
-// Customs
+// Custom:
 template<typename T>
 using dynamicList = vector<T>;
 #include "TimeManager.h"

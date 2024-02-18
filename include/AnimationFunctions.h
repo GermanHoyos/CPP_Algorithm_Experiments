@@ -1,8 +1,10 @@
 #include "MasterHeader.h"
 
-float animationSpeed = 0.1f;
+float animationSpeed = 1.0f;
 bool setValues = false;
-    int i = 0;
+int i = 0;
+
+
 
 float   
     zeroToOneProgressEaseIn,
