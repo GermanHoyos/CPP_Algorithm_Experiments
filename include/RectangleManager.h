@@ -20,6 +20,9 @@ class RectangleClass {
     // // Animate individual members and add time cap
     void animate(void (*func)(float& x, float& y, float duration), float timeChosen);
 
+    // full tween control experiment
+    void use(void (*func)(float& xStart, float& yStart, vector<Vector2> positions, float usrDefDuration), float timeChosen);
+
 };
 
     // // Animate rectangle with individual members

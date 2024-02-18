@@ -17,6 +17,8 @@ int main() {
 
     // Create a RectangleClass object with appropriate arguments
     RectangleClass myRect(myGreen, 100.0f, 100.0f, 200.0f, 100.0f);
+    RectangleClass myRect2(myGreen, 100.0f, 100.0f, 100.0f, 500.0f);
+
 
 
     // Window title / target FPS
@@ -35,10 +37,11 @@ int main() {
         TimeClass::displayGameTime();
  
         myRect.drawRectMthd();
+        myRect2.drawRectMthd();
         
         //[obj.animate](function, time in seconds)
-        myRect.animate(applyEaseOut, 20.0f);
-
+        myRect.animate(applyEaseIn, 20.0f);
+        myRect2.use(keyFrames, 20.0f);        
 
  
         EndDrawing();

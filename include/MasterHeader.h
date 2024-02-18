@@ -11,12 +11,15 @@
 #include <iomanip>
 #include <vector>
 #include <random>
+using namespace std;
+
+// Customs
+template<typename T>
+using dynamicList = vector<T>;
 #include "TimeManager.h"
 #include "RectangleManager.h"
 #include "AnimationFunctions.h"
 
 
-using namespace std;
 
-template<typename T>
-using dynamicList = vector<T>;
+
