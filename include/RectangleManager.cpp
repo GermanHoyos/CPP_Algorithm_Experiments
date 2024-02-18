@@ -5,14 +5,8 @@ void RectangleClass::drawRectMthd(){
     DrawRectangleV({x,y},{height,width},color);
 };
 
-void RectangleClass::animate(void (*func)(float& x, float& y, float duration), float timeChosen) {
-    func(x, y, timeChosen);
-    x = this->x;
-    y = this->y;
-};
-
 void RectangleClass::use(void (*func)(float& x, float& y, vector<Vector2> positions, float usrDefDuration), float timeChosen){
-    vector<Vector2> listOfPoints = {{400, 400}, {100, 100}, {600, 400}};
+    vector<Vector2> listOfPoints = {{300, 400}, {700, 100}, {100, 400}, {200, 100}};
     func(x, y, listOfPoints, timeChosen);
     x = this->x;
     y = this->y;
