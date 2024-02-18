@@ -1,8 +1,14 @@
 #include "MasterHeader.h"
 
-float animationSpeed = 0.2f;
+float animationSpeed = 0.1f;
 bool setValues = false;
-float zeroToOneProgressEaseIn, easeIn_animation_duration, zeroToOneProgressEaseOut, easout_animation_duration = 0.0F;
+    int i = 0;
+
+float   
+    zeroToOneProgressEaseIn,
+    easeIn_animation_duration,
+    zeroToOneProgressEaseOut,
+    easout_animation_duration = 0.0F;
 
 /***********************
 **                    **
@@ -23,16 +29,11 @@ float easeOut(float zeroToOneProgressEaseOut) { // Green line on Desmos
     return 1 - (1 - zeroToOneProgressEaseOut) * (1 - zeroToOneProgressEaseOut); //1-(x-1)^2 {0<x<1}
 }
 
-
-
-
-
-
-
-
-
-
-
+/***********************
+**                    **
+**     Apply Easings  **
+**                    **
+***********************/
 inline void applyEaseIn(float& x, float& y, float usrDefDuration) {
 
     // Direction of tween must be explicitly determined since vector math is not integrated into the easing function.
@@ -168,49 +169,10 @@ inline void applyEaseOut(float& x, float& y, float usrDefDuration) {
         //code here..
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***********************
-**                    **
-**     EASE IN        **
-**                    **
-***********************/
-// float easeIn(float zeroToOneProgressEaseIn) { // Blue line on desmos
-// 	return zeroToOneProgressEaseIn * zeroToOneProgressEaseIn; //x^2 {0<x<1}
-// }
-
-/***********************
-**                    **
-**     EASE OUT       **
-**                    **
-***********************/
-// zeroToOneProgressEaseOut 0.0f to 1.0f
-// float easeOut(float zeroToOneProgressEaseOut) { // Green line on Desmos
-//     return 1 - (1 - zeroToOneProgressEaseOut) * (1 - zeroToOneProgressEaseOut); //1-(x-1)^2 {0<x<1}
-// }
-
-
-
-
-
 inline void keyFrames(float& x, float& y, vector<Vector2> positions, float usrDefDuration) {
     
     // Iterator for positions list
-    int i = 0;
+
 
     // Direction of tween must be explicitly determined since vector math is not integrated into the easing function.
     static bool tweenLeft   = false;
@@ -240,57 +202,51 @@ inline void keyFrames(float& x, float& y, vector<Vector2> positions, float usrDe
     zeroToOneProgressEaseOut += animationSpeed * TimeClass::getDeltaTime();
     
     if (tweenRight) {
-        // Apply tween
+        // Apply tween / Detect when peak is reached / Determine new tween direction
         x = x + (positions[i].x - x) * factor;
-        
-        if (x > (positions[i].x - 1.0)) {
+        if (x >= (positions[i].x - 0.1f)) {
            zeroToOneProgressEaseOut = 0.0;
-
-            if ( positions[i + 1].x > (x) ) { tweenRight = true; tweenLeft  = false; }
-            if ( positions[i + 1].x < (x) ) { tweenLeft  = true; tweenRight = false; }
-
-            i++;
-            
+            if ( positions[i + 1].x >= (x) ) { 
+                initTweenDirSwtch = false;
+                i = i + 1;
+            } else {
+                initTweenDirSwtch = false;
+                i = i + 1;
+            }
         }
-      
     }
 
     if (tweenLeft) {
-
-        //Apply Tween
+        //Apply Tween / Detect when peak is reached / Determine new tween Direction
         x = x + (positions[i].x - x) * factor;
-        
-        if (x < (positions[i].x + 1.0)) {
+        if (x <= (positions[i].x + 0.1f)) {
             zeroToOneProgressEaseOut = 0.0;    
-            if ( positions[i + 1].x > (x) ) { tweenRight = true; tweenLeft  = false; }
-            if ( positions[i + 1].x < (x) ) { tweenLeft  = true; tweenRight = false; }
-
-            i++;
-
-            
-            
-        
-            // if ( positions[i].x > (x - 1.0) ) { tweenRight = true; tweenLeft  = false; }
-            // if ( positions[i].x < (x + 1.0) ) { tweenLeft  = true; tweenRight = false; }
-            //factor = 0.0f;
+            if ( positions[i + 1].x >= (x) ) { 
+                initTweenDirSwtch = false;
+                i = i + 1;
+            } else {
+                initTweenDirSwtch = false;
+                i = i + 1;
+            }
         }
     }
 
     if (tweenUp) {
-        //y--;
+        
     }
     
     if (tweenDown) {
         //y++;
     }
    
+   // Dont exceed list
+    if (i == positions.size()) {
+        i = 0;
+    }
+
+
     std::string factor_str  = std::to_string(factor);
     std::string x_str  = std::to_string(x);
     DrawText(factor_str.c_str(), x, (y + 100), 20, GREEN); //0.0 to 0.1
     DrawText(x_str.c_str(), x, (y + 120), 20, GREEN); // init to end
-    
-    
-    
-    // x++;
-    // y++;
 }
