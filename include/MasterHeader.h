@@ -18,9 +18,11 @@ using namespace std;
 // Custom:
 template<typename T>
 using dynamicList = vector<T>;
+#include "SectionsHeader.h"
 #include "TimeManager.h"
-#include "RectangleManager.h"
 #include "AnimationFunctions.h"
+#include "RectangleManager.h"
+
 
 
 

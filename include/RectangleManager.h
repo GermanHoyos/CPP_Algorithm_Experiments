@@ -2,26 +2,77 @@
 #pragma once
 
 class RectangleClass {
+public:
 
-    // Made these public for ease of animation, no getters or setters needed
-    public:
-    Color color; 
-    float x, y, height, width;
-    bool animState_1, animState_2, animState_3;
+    // Member variables
+    AnimObj animObj;                // By user
+    Color color;                    // By user
+    float h;                        // By user
+    float w;                        // 
+    float x;                        //
+    float y;                        //
+    bool printDebugs    = true;     // By user   
+    bool tweenAlpha     = false;    // By user
+    bool tweenColors    = false;    // By user
+    int r, g, b, a;                 // infer
+    bool amAlive        = true;     // infer
 
     // Constructor
-    RectangleClass (Color c, float h, float w, float xPos, float yPos)
-    : color(c), height(h), width(w), x(xPos), y(yPos),
-    animState_1(false), animState_2(false), animState_3(false) {}
+    RectangleClass
+    (
+        Color color,
+        float h,
+        float w,
+        float x,
+        float y,
+        bool printDebugs,
+        bool tweenAlpha,
+        bool tweenColors
+    ) :
+        color(color),
+        h(h),
+        w(w),
+        x(x),
+        y(y),
+        printDebugs(printDebugs),
+        tweenAlpha(tweenAlpha),
+        tweenColors(tweenColors)
+    { /* Additional init logic here */ }
+
+    // Destructor
+    ~RectangleClass() {
+        // No specific cleanup tasks required for this class
+    }
 
     // Draw rectangle
-    void drawRectMthd();
+    void drawRectMthd() {
+        // If this object exists, then draw it
+        DrawRectangleV({ x, y }, { w, h }, color);
+    }
 
-    // Apply tween controls to this objects position
-    void use(
-        void (*func)(float& xStart, float& yStart, vector<Vector2> positions, float usrDefDuration, string tweenType),
+    // Apply tween controls to this object's position
+    void use
+    (
+        AnimObj& obj,
         float timeChosen,
-        vector<Vector2>listOfPoints,
-        string tweenType
-    );
+        std::vector<Vector2> listOfPoints,
+        std::string tweenType
+    ) 
+    {
+        obj.keyFrames(
+            color,
+            x,
+            y,
+            h,
+            w,
+            r,g,b,a,
+            listOfPoints,
+            timeChosen,
+            tweenType,
+            printDebugs,
+            amAlive,
+            tweenAlpha,
+            tweenColors
+        );
+    }
 };
