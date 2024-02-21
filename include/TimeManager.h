@@ -35,7 +35,7 @@ public:
         string deltaTime_str = "Delta Time: " + to_string(deltaTime);
         string fps_str = "FPS: " + to_string(FPS);
 
-        DrawLine(210, 0, 210, 1000, GREEN);
+        DrawLine(210, 0, 210, 310, GREEN);
         DrawText(fps_str.c_str(), 2, 2, 20, GREEN);
         DrawText(seconds_str.c_str(), 2, 20, 20, GREEN);
         DrawText(minutes_str.c_str(), 2, 40, 20, GREEN);

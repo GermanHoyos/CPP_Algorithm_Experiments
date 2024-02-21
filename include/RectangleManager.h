@@ -14,8 +14,12 @@ public:
     bool printDebugs    = true;     // By user   
     bool tweenAlpha     = false;    // By user
     bool tweenColors    = false;    // By user
-    int r, g, b, a;                 // infer
-    bool amAlive        = true;     // infer
+    int timeToDie;                  // By user
+
+    // Based on tweens / other logic
+    int r, g, b, a;                 // Infer
+    bool amAlive        = true;     // Infer
+    int timeAlive;                  // Infer
 
     // Constructor
     RectangleClass
@@ -27,7 +31,8 @@ public:
         float y,
         bool printDebugs,
         bool tweenAlpha,
-        bool tweenColors
+        bool tweenColors,
+        int timeToDie
     ) :
         color(color),
         h(h),
@@ -36,7 +41,8 @@ public:
         y(y),
         printDebugs(printDebugs),
         tweenAlpha(tweenAlpha),
-        tweenColors(tweenColors)
+        tweenColors(tweenColors),
+        timeToDie(timeToDie)
     { /* Additional init logic here */ }
 
     // Destructor
@@ -54,11 +60,11 @@ public:
     void use
     (
         AnimObj& obj,
-        float timeChosen,
         std::vector<Vector2> listOfPoints,
         std::string tweenType
     ) 
     {
+        // Match of AnimationFunctions.h
         obj.keyFrames(
             color,
             x,
@@ -67,12 +73,12 @@ public:
             w,
             r,g,b,a,
             listOfPoints,
-            timeChosen,
             tweenType,
             printDebugs,
             amAlive,
             tweenAlpha,
-            tweenColors
+            tweenColors,
+            timeToDie
         );
     }
 };

@@ -3,7 +3,6 @@
 class AnimObj {
 private:
 
-    float timeChosen;
     float animationSpeed = 0.01f;
     bool setValues = false;
     int i = 0;
@@ -43,6 +42,26 @@ private:
         return 1 - (1 - zeroToOneProgressEaseOut) * (1 - zeroToOneProgressEaseOut); //1-(x-1)^2 {0<x<1}
     }
 
+    /***********************
+    **                    **
+    **     LERP           **
+    **                    **
+    ***********************/
+    float lerp(float a, float b, float t){
+        return a + t * (b - a);
+    }
+
+    /***********************
+    **                    **
+    ** NORMALIZED LERP    **
+    **                    **
+    ***********************/
+    float normalizedLerp(float a, float b, float t, float minT, float maxT){
+        //Normalize t to be within the range [0,1]
+        float normalizedT = (t - minT) / (maxT - minT);
+        return lerp(a, b, normalizedT);
+    }
+
 public:
     /***********************
     **                    **
@@ -51,6 +70,7 @@ public:
     ***********************/
     // For the purposes of basic tweens on an x,y plane, the below func is sufficient, however
     // not recommended for game logic or interaction-based animations
+    // Match of "use()"
     void keyFrames(
         Color& color,
         float& x,
@@ -59,12 +79,12 @@ public:
         float& w,
         int& r, int& g, int& b, int& a,
         vector<Vector2> positions,
-        float& timeChosen,
         string tweenType,
         bool& printDebugs,
         bool& amAlive,
         bool& tweenAlpha,
-        bool& tweenColors
+        bool& tweenColors,
+        int timeToDie
     ) {
 
         // Check which tweens to call
@@ -143,7 +163,10 @@ public:
         }
 
         if (tweenAlpha) {
-            //color = {0,225,225,225};
+            //int a =  -(factor * 9050);
+            //color = {0,225,0,a};
+
+
         }
 
         if (tweenColors) {

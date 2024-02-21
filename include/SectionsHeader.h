@@ -10,41 +10,38 @@ public:
     string eOuMath = "a = 1-(x-1)^2{0<x<1}";
     string eStringOuExp = "EASE OUT APPLICATIONS:";
     string eStringInExp = "EASE IN APPLICATIONS:";
-    string eOpacity = "Opacity + [x,y] plane:";
+    string eOpacityIn = "Opacity + [x,y] plane Ease In";
+    string eOpacityOu = "Opacity + [x,y] plane Ease Out";
+
     string eColor = "std::rand() Color + [x,y] plane";
     string eShape = "Obj Shape / Width Height";
 
     void draw() {
         // Line Sections:
-        DrawLine(210, 310, 1600, 310, GREEN);
-        DrawLine(905, 310, 905, 1000, GREEN);  
+        DrawLine(0, 310, 1600, 310, GREEN);
+        //DrawLine(800, 310, 800, 1600, GREEN);
+        //DrawLine(905, 310, 905, 310, RED);  
 
-        // Header ease outs
+        // Header ease ins
         DrawText(eStringIn.c_str(), 220, 25, 35, GREEN);
         DrawText(eFormula.c_str(), 220, 55, 20, GREEN);
         DrawText(eInMath.c_str(), 220, 75, 20, GREEN);
 
-        // Header ease ins
+        // Header ease outs
         DrawText(eStringOu.c_str(), 220, 165, 35, GREEN);
         DrawText(eFormula.c_str(), 220, 195, 20, GREEN);
         DrawText(eOuMath.c_str(), 220, 215, 20, GREEN);
 
-        // Titles
-        DrawText(eStringInExp.c_str(), 355, 320, 35, GREEN);
-        DrawText(eStringOuExp.c_str(), 1020, 320, 35, GREEN);
+
         
         //Left top
-        DrawText(eOpacity.c_str(), 220, 400, 20, GREEN);
-        DrawRectangleLines(250, 425, 610, 200, GREEN);
-        //Left bottom
-        DrawText(eColor.c_str(), 220, 700, 20, GREEN);
-        DrawRectangleLines(250, 725, 610, 200, GREEN);
+        DrawText(eOpacityIn.c_str(), 5, 315, 20, GREEN);
+        DrawRectangleLines(5, 340, 790, 650, GREEN);
+
 
         //Right top
-        DrawText(eOpacity.c_str(), 915, 400, 20, GREEN);
-        DrawRectangleLines(945, 425, 610, 200, GREEN);  
-        //Right bottom
-        DrawText(eColor.c_str(), 915, 700, 20, GREEN);
-        DrawRectangleLines(945, 725, 610, 200, GREEN);
+        DrawText(eOpacityOu.c_str(), 805, 315, 20, GREEN);
+        DrawRectangleLines(805, 340, 790, 650, GREEN);  
+
     }
 };

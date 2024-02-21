@@ -36,8 +36,8 @@ int main() {
 
     // Instantiate Objects
     // Arguments        (color, height, width, x, y, printDebugs, tweenAplha, tweenColors)
-    RectangleClass rect1(myGreen, 100.0f, 100.0f, 410, 25, true, true, false);  // Section 1 / demo easeIn
-    RectangleClass rect2(myGreen, 100.0f, 100.0f, 410, 165, true, false, false); // Section 1 / demo easeOut
+    RectangleClass rect1(myGreen, 100.0f, 100.0f, 410, 25, true, true, false, 5);  // Section 1 / demo easeIn
+    RectangleClass rect2(myGreen, 100.0f, 100.0f, 410, 165, true, true, false, 5); // Section 1 / demo easeOut
 
     // Instantiate AnimObjs to be used with above objects
     AnimObj obj0; // Section 1 / demo easeIn
@@ -67,8 +67,8 @@ int main() {
         rect2.drawRectMthd();
         
         // use Arguments: ();
-        rect1.use(obj0, 0.0f, leftToRightDemo1, "easeIn");
-        rect2.use(obj1, 0.0f, leftToRightDemo2, "easeOut");
+        rect1.use(obj0, leftToRightDemo1, "easeIn");
+        rect2.use(obj1, leftToRightDemo2, "easeOut");
 
 
 
