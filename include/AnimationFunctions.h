@@ -162,11 +162,41 @@ public:
 
         }
 
+
+    /***********************
+    **                    **
+    **     LERP           **
+    **                    **
+    ***********************/
+    // float lerp(float a, float b, float t){
+    //     return a + t * (b - a);
+    // }
+
+    /***********************
+    **                    **
+    ** NORMALIZED LERP    **
+    **                    **
+    ***********************/
+    // float normalizedLerp(float a, float b, float t, float minT, float maxT){
+    //     //Normalize t to be within the range [0,1]
+    //     float normalizedT = (t - minT) / (maxT - minT);
+    //     return lerp(a, b, normalizedT);
+    // }
+
         if (tweenAlpha) {
-            //int a =  -(factor * 9050);
-            //color = {0,225,0,a};
+
+            //Attempting to lerp alpha
+                // Attempt 1
+                float alpha = normalizedLerp(0.0f,255.0f,factor,0.0f, 0.090f);
+                int alphaInt = static_cast<int>(alpha);
+
+            string alpha_str = to_string(alpha);
+            DrawText(alpha_str.c_str(), 10, 100, 20, GREEN);
 
 
+            color = {0,255,0,alphaInt};
+
+            //unsigned char alphaChar = static_cast<unsigned char>(alphaFloat);
         }
 
         if (tweenColors) {

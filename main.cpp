@@ -32,11 +32,12 @@ int main() {
     // RGBA
     Color myGreen = {0, 255, 0, 255};
 
+    // Boundaries
     DrawSections outlineSections;
 
     // Instantiate Objects
     // Arguments        (color, height, width, x, y, printDebugs, tweenAplha, tweenColors)
-    RectangleClass rect1(myGreen, 100.0f, 100.0f, 410, 25, true, true, false, 5);  // Section 1 / demo easeIn
+    RectangleClass rect1(myGreen, 100.0f, 100.0f, 410, 25, true, false, false, 5);  // Section 1 / demo easeIn
     RectangleClass rect2(myGreen, 100.0f, 100.0f, 410, 165, true, true, false, 5); // Section 1 / demo easeOut
 
     // Instantiate AnimObjs to be used with above objects
