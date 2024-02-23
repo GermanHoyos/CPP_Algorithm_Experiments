@@ -5,7 +5,7 @@
 #include <iostream>
 #include <raylib-cpp.hpp>
 #include <raylib.h>
-#include <cmath>
+#include <cmath> // absolute val
 #include <algorithm>
 #include <math.h>
 #include <stdlib.h>

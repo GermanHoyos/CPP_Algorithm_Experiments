@@ -34,12 +34,12 @@ public:
 
 
         
-        //Left top
+        //Left box
         DrawText(eOpacityIn.c_str(), 5, 315, 20, GREEN);
         DrawRectangleLines(5, 340, 790, 650, GREEN);
 
 
-        //Right top
+        //Right box
         DrawText(eOpacityOu.c_str(), 805, 315, 20, GREEN);
         DrawRectangleLines(805, 340, 790, 650, GREEN);  
 
