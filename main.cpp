@@ -37,7 +37,7 @@ int main() {
     int lbMaxX = 795;
     int lbMinY = 340;
     int lbMaxY = 990;
-    for (int i = 0; i < 250; i++) {
+    for (int i = 0; i < 10; i++) {
         int randomX = lbMinX + rand() % (lbMaxX - lbMinX);
         int randomY = lbMinY + rand() % (lbMaxY - lbMinY);
         float floatX = static_cast<float>(randomX);
@@ -56,7 +56,7 @@ int main() {
     // Arguments        (color, height, width, x, y, printDebugs, tweenAplha, tweenColors)
     RectangleClass rect1(myGreen, 100.0f, 100.0f, 410, 25, true, false, false, 5);  // Section 1 / demo easeIn
     RectangleClass rect2(myGreen, 100.0f, 100.0f, 410, 165, true, false, false, 5); // Section 1 / demo easeOut
-    RectangleClass rect3(myGreen, 5.0f, 5.0f, 10, 350, false, true, false, 5); // Section 1 / demo easeOut
+    RectangleClass rect3(myGreen, 5.0f, 5.0f, 790, 500, false, true, false, 5); // Section 1 / demo easeOut
 
 
 
