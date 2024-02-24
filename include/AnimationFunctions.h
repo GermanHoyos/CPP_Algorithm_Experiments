@@ -19,15 +19,15 @@ private:
     bool tweenRight  = false;
     bool tweenUp     = false;
     bool tweenDown   = false;
+    float previouX = 0;
+    float derivedSpeed = 0;
+    float alpha = 0;
     float factor;
     float currentX;
     float deltaX;
-    float previouX = 0;
-    float derivedSpeed = 0;
     float normalizePos1;
     float normalizePos2;
     float absDistance;
-    float alpha = 0;
     float halfwayPoint;
     float minSpeed;
     float maxSpeed;
@@ -143,7 +143,7 @@ public:
         DrawText(x_str.c_str(), x, (y + 120), 20, GREEN); // init to end
     }
 
-
+    // Generalized right direction up or down
     if (tweenRight) {
         // Apply tween / Detect when peak is reached / Determine new tween direction
         x = x + (positions[i].x - x) * factor;
@@ -164,6 +164,7 @@ public:
         }
     }
 
+    // Generalized left direction up or down
     if (tweenLeft) {
         // Apply Tween / Detect when peak is reached / Determine new tween Direction
         x = x + (positions[i].x - x) * factor;
@@ -184,83 +185,62 @@ public:
         }
     }
 
-    // NOTES: for reference only:
-    /***********************
-    **                    **
-    **     LERP           **
-    **                    **
-    ***********************/
-    // float lerp(float a, float b, float t){
-    //     return a + t * (b - a);
-    // }
-
-    /***********************
-    **                    **
-    ** NORMALIZED LERP    **
-    **                    **
-    ***********************/
-    // float normalizedLerp(float a, float b, float t, float minT, float maxT){
-    //     //Normalize t to be within the range [0,1]
-    //     float normalizedT = (t - minT) / (maxT - minT);
-    //     return lerp(a, b, normalizedT);
-    // }
-
-
     if (amAlive) {
 
     }
 
-if (tweenAlpha) {
-    currentX = x;
-    //DrawRectangleV({ x, y }, { 2, 2 }, RED);
+    if (tweenAlpha) {
+        currentX = x;
+        //DrawRectangleV({ x, y }, { 2, 2 }, RED);
 
-    // Lerp alpha ***********************************************************************************
-        // This technique gradualy increases the alpha as the factor increases
-        // factor is based on tween progression
-        // float alpha = normalizedLerp(0.0f,255.0f,factor,0.0f, 0.090f);
-        // int alphaInt = static_cast<int>(alpha);
-        // string alpha_str = to_string(alpha);
-        // DrawText(alpha_str.c_str(), 10, 100, 20, GREEN);
-        // color = {0,255,0,alphaInt};
+        // Lerp alpha ***********************************************************************************
+            // This technique gradualy increases the alpha as the factor increases
+            // factor is based on tween progression
+            // float alpha = normalizedLerp(0.0f,255.0f,factor,0.0f, 0.090f);
+            // int alphaInt = static_cast<int>(alpha);
+            // string alpha_str = to_string(alpha);
+            // DrawText(alpha_str.c_str(), 10, 100, 20, GREEN);
+            // color = {0,255,0,alphaInt};
 
-    // Lerp distance / speed ************************************************************************
-    // Check if it's the first index
-    if (i > 0) {
+        // Lerp distance / speed ************************************************************************
+        // Check if it's the first index
+        if (i > 0) {
+            
+            deltaX = currentX - previouX;
+            derivedSpeed = deltaX / GetFrameTime(); // Calculate derived speed
+            derivedSpeed = fabs(derivedSpeed);      // Absolute value of speed
+
+            // Define range for brightness and speed
+            // i = where im headed
+            // i - 1 = where im coming from
+            float distance = fabs(positions[i].x - positions[i-1].x); 
         
-        deltaX = currentX - previouX;
-        derivedSpeed = deltaX / GetFrameTime(); // Calculate derived speed
-        derivedSpeed = fabs(derivedSpeed);      // Absolute value of speed
+            float minSpeed = 0.0f;
+            float maxSpeed = distance / 2;  // pixel distance to center of (i) - (i - 1)
 
-        // Define range for brightness and speed
-        // i = where im headed
-        // i - 1 = where im coming from
-        float distance = fabs(positions[i].x - positions[i-1].x); 
-      
-        float minSpeed = 0.0f;
-        float maxSpeed = distance / 2;  // pixel distance to center of (i) - (i - 1)
+            float minBrightness = 0.0f;
+            float maxBrightness = 255.0f;
 
-        float minBrightness = 0.0f;
-        float maxBrightness = 255.0f;
+            // Normalize speed within the defined range
+            // Clamping derived speed between min and max speeds
+            float normalizedSpeed = clamp(derivedSpeed, minSpeed, maxSpeed) / maxSpeed;
 
-        // Normalize speed within the defined range
-        // Clamping derived speed between min and max speeds
-        float normalizedSpeed = clamp(derivedSpeed, minSpeed, maxSpeed) / maxSpeed;
-
-        // Lerp normalized speed to brightness within the defined range
-        float brightness = lerp(minBrightness, maxBrightness, normalizedSpeed);
- 
-        // Apply brightness
-        color = {0, 255, 0, brightness};
-    } else {
-        // Handle the case when i is the first index
-        // For example, you can set default brightness or skip the calculation
-        // color = {0, 255, 0, 255}; // Default to maximum brightness
-    }
-
-    // First assignment of x on first call of this loop:
-    previouX = x;
+            // Lerp normalized speed to brightness within the defined range
+            float brightness = lerp(minBrightness, maxBrightness, normalizedSpeed);
     
-}
+            // Apply brightness
+            color = {0, 255, 0, brightness};
+            
+        } else {
+            // Handle the case when i is the first index
+            // For example, you can set default brightness or skip the calculation
+            color = {0, 255, 0, 0}; // Default to maximum brightness
+        }
+
+        // First assignment of x on first call of this loop:
+        previouX = x;
+
+    }
 
     if (tweenColors) {
 
