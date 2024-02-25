@@ -10,7 +10,7 @@ public:
     string eOuMath = "a = 1-(x-1)^2{0<x<1}";
     string eStringOuExp = "EASE OUT APPLICATIONS:";
     string eStringInExp = "EASE IN APPLICATIONS:";
-    string eOpacityIn = "Opacity + [x,y] plane Ease In";
+    string eOpacityIn = "UI Animations";
     string eOpacityOu = "Opacity + [x,y] plane Ease Out";
 
     string eColor = "std::rand() Color + [x,y] plane";
@@ -35,12 +35,12 @@ public:
 
         
         //Left box
-        DrawText(eOpacityIn.c_str(), 5, 315, 20, GREEN);
+        DrawText(eOpacityOu.c_str(), 5, 315, 20, GREEN);
         DrawRectangleLines(5, 340, 790, 650, GREEN);
 
 
         //Right box
-        DrawText(eOpacityOu.c_str(), 805, 315, 20, GREEN);
+        DrawText(eOpacityIn.c_str(), 805, 315, 20, GREEN);
         DrawRectangleLines(805, 340, 790, 650, GREEN);  
 
     }
