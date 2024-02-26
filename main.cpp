@@ -2,13 +2,21 @@
 
 int main() {
     
-    // Initializations
+    // 2D - Initializations
     int screenWidth = 1600;
     int screenHeight = 1000;
     int N = 900;                // Use for rand()
     int minX = 210;             // The debug vertical line is: x = 210;
     // RGBA
     Color myGreen = {0, 255, 0, 255};
+
+    // 3D - Initializations
+    Camera camera = { 0 };
+    camera.position = (Vector3){ 18.0f, 21.0f, 18.0f };     // Camera position
+    camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };          // Camera looking at point
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };              // Camera up vector (rotation towards target)
+    camera.fovy = 45.0f;                                    // Camera field-of-view Y
+    camera.projection = CAMERA_PERSPECTIVE;                 // Camera projection type
 
     // Manual debugs / Testing only / Random values for tweens 
     vector<Vector2> listOfPoints = {{300, 400}, {700, 100}, {100, 400}, {200, 100}};
@@ -108,7 +116,7 @@ int main() {
         ClearBackground(BLACK);
         TimeClass::displayGameTime();
 
-
+        // Define section borders and descriptions
         outlineSections.draw();
 
         // Objects:
@@ -116,13 +124,14 @@ int main() {
         rect2.drawRectMthd();
         rect3.drawRectMthd();
         
-        // use Arguments: ();
+        // use Arguments: (animObj, coordLists, typeofTween);
         rect1.use(obj0, leftToRightDemo1, "easeIn");
         rect2.use(obj1, leftToRightDemo2, "easeOut");
         rect3.use(obj2, randList_2, "easeOut");
 
         // Draw all rects in list containing rects
         for (auto& rect : rects) {
+            // Call draw in all rects
             rect.drawRectMthd();
 
             // Get an obj
@@ -131,15 +140,30 @@ int main() {
             // Get an list
             vector<Vector2>& currentList = listOfLists[iterator];
 
-
+            // Call easings on all rects
             rect.use(currentObj, currentList, "easeOut");
 
             iterator++;
-          if (iterator >= objs.size()) {
-            // Reset iterateObjs if it exceeds the size of the objs vector
-            iterator = 0;
-          }
+            if (iterator >= objs.size()) {
+                // Reset iterateObjs if it exceeds the size of the objs vector
+                iterator = 0;
+            }
         }
+
+        /***********************
+        **                    **
+        **     3D Context     **
+        **                    **
+        ***********************/
+        // Orbit Camera around a target
+        UpdateCamera(&camera, CAMERA_ORBITAL); // Uses "target" as orbital target point
+        // Draw 3D  scene, keep in mind entire screen has 3D context due to below
+        BeginMode3D(camera);
+
+            DrawGrid(20, 1.0f);
+        EndMode3D();
+
+
 
         EndDrawing();
     }
